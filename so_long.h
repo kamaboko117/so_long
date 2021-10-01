@@ -6,17 +6,20 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/30 16:01:17 by asaboure          #+#    #+#             */
-/*   Updated: 2021/09/30 17:55:10 by asaboure         ###   ########.fr       */
+/*   Updated: 2021/10/01 04:37:36 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
+#ifndef SO_LONG_H
+# define SO_LONG_H
+# include "libft/libft.h"
+# include "minilibx-linux/mlx.h"
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <fcntl.h>
 
 typedef struct s_inputs
 {
@@ -30,6 +33,7 @@ typedef struct s_player
 {
 	int	x;
 	int	y;
+	int	count;
 }				t_player;
 
 typedef struct s_imgdata
@@ -46,11 +50,12 @@ typedef struct s_imgdata
 
 typedef struct s_map
 {
-	int		map_x;
-	int		map_y;
-//	int		map_s;
-	int		**map;
-	char	*tmpmap;
+	int						map_x;
+	int						map_y;
+	int						map_s;
+	long unsigned int		line_len;
+	int						**map;
+	char					*tmpmap;
 }				t_map;
 
 typedef struct s_data
@@ -73,6 +78,14 @@ void	exit_failure(char *error, t_data *data);
 void	puterror(char *str);
 t_data	*datainit(void);
 void	read_ber(char *ber_path, t_data *data);
-int	isempty(char *line);
-int	isplayer(char c);
-int	isrow(char *row);
+int		isempty(char *line);
+int		isplayer(char c);
+int		isrow(char *row);
+void	clear_game(t_data *data);
+void	game_loop(t_data *data);
+void	check_ber_data(t_data *data);
+void	get_layout(t_data *data);
+void	set_position(t_player *player, int pos_x, int pos_y);
+void	free_split(char **str);
+void	check_layout(t_data *data, t_map *map, t_player *player);
+#endif

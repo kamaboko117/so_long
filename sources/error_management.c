@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/30 17:48:51 by asaboure          #+#    #+#             */
-/*   Updated: 2021/09/30 17:49:50 by asaboure         ###   ########.fr       */
+/*   Updated: 2021/10/01 03:33:19 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@ void	puterror(char *str)
 
 void	exit_failure(char *error, t_data *data)
 {
-//	clear_game(data);
-		(void)data;
+	clear_game(data);
 	puterror(error);
 	exit(EXIT_FAILURE);
 }
