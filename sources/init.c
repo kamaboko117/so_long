@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/30 17:45:58 by asaboure          #+#    #+#             */
-/*   Updated: 2021/10/01 04:26:36 by asaboure         ###   ########.fr       */
+/*   Updated: 2021/10/01 21:07:54 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,12 +83,14 @@ t_data	*datainit(void)
 	data->map_started = 0;
 	data->map_stopped = 0;
 	data->sp_texture = imgstructinit(data);
+	data->tiles = imgstructinit(data);
 	data->img = imgstructinit(data);
 	data->player = playerstructinit();
 	data->map = mapstructinit();
 	data->inputs = inputstructinit();
 	if (!(data->sp_texture) || !(data->img)
-		|| !(data->player) || !(data->map) || !(data->inputs))
+		|| !(data->player) || !(data->map) || !(data->tiles) || !(data->inputs))
 		return (NULL);
+	data->tiles->path = "textures/wall.xpm";
 	return (data);
 }

@@ -6,7 +6,7 @@
 #    By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/21 14:20:20 by asaboure          #+#    #+#              #
-#    Updated: 2021/10/01 04:40:46 by asaboure         ###   ########.fr        #
+#    Updated: 2021/10/01 21:15:52 by asaboure         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,10 @@ SRCS	=	so_long.c															\
 			sources/game_loop.c													\
 			sources/parsing_checks.c											\
 			sources/parsing_layout.c											\
-			sources/parsing_checks2.c
+			sources/parsing_checks2.c											\
+			sources/drawutils.c													\
+			sources/texture.c													\
+			sources/utils2.c
 			
 LIBFTSRCS = ft_memccpy.c														\
 			ft_memchr.c															\
