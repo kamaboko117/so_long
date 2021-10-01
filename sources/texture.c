@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/01 17:34:39 by asaboure          #+#    #+#             */
-/*   Updated: 2021/10/01 21:17:15 by asaboure         ###   ########.fr       */
+/*   Updated: 2021/10/01 21:49:31 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,5 @@ void	set_texture(t_data *data, t_imgdata *texture)
 			&(texture->bpp),
 			&(texture->line_len),
 			&(texture->endian));
+	data->map->map_s = texture->width;
 }

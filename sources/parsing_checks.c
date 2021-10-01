@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/01 03:11:54 by asaboure          #+#    #+#             */
-/*   Updated: 2021/10/01 04:40:07 by asaboure         ###   ########.fr       */
+/*   Updated: 2021/10/01 22:33:16 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	check_map(t_data *data)
 	}
 }
 
-static void	check_dimensions(t_data *data, int *width, int *height)
+void	check_dimensions(t_data *data, int *width, int *height)
 {
 	int	max_x;
 	int	max_y;
@@ -52,10 +52,10 @@ static void	check_dimensions(t_data *data, int *width, int *height)
 	if (data->mlx_ptr == NULL)
 		exit_failure("failed to initiate mlx instance\n", data);
 	mlx_get_screen_size(data->mlx_ptr, &max_x, &max_y);
-	if (*width < 480)
-		*width = 480;
-	if (*height < 320)
-		*height = 320;
+	if (*width < 100)
+		*width = 100;
+	if (*height < 100)
+		*height = 100;
 	if (*width >= max_x)
 		*width = max_x;
 	if (*height >= max_y)
@@ -66,7 +66,4 @@ static void	check_dimensions(t_data *data, int *width, int *height)
 void	check_ber_data(t_data *data)
 {
 	check_map(data);
-	data->win_h = data->map->map_y * data->map->map_s;
-	data->win_w = data->map->map_x * data->map->map_s;
-	check_dimensions(data, &(data->win_w), &(data->win_h));
 }

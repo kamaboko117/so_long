@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/30 17:51:30 by asaboure          #+#    #+#             */
-/*   Updated: 2021/10/01 18:01:43 by asaboure         ###   ########.fr       */
+/*   Updated: 2021/10/01 22:31:15 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ void	get_ber_data(char *line, t_data *data)
 	{
 		if (data->map_stopped == 1 && !isempty(line))
 			exit_failure("Map has a format error (1)\n", data);
-		if (ft_strlen(line) != data->map->line_len)
-			exit_failure("Map is not rectangular\n", data);
 		if (isempty(line))
 			data->map_stopped = 1;
 		else if (isrow(line))
@@ -51,7 +49,6 @@ void	get_ber_data(char *line, t_data *data)
 		if (isrow(line))
 		{
 			data->map_started = 1;
-			data->map->line_len = ft_strlen(line);
 			get_map(line, data);
 		}
 		else
@@ -79,5 +76,9 @@ void	read_ber(char *ber_path, t_data *data)
 		check_ber_data(data);
 		get_layout(data);
 		check_layout(data, data->map, data->player);
+		data->win_h = data->map->map_y * data->map->map_s;
+		data->win_w = data->map->map_x * data->map->map_s;
+		printf("win_w: %d, win_h: %d\n", data->win_w, data->win_h);
+		check_dimensions(data, &(data->win_w), &(data->win_h));
 	}
 }

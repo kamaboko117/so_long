@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/01 04:56:24 by asaboure          #+#    #+#             */
-/*   Updated: 2021/10/01 21:17:24 by asaboure         ###   ########.fr       */
+/*   Updated: 2021/10/01 22:20:29 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,31 @@ void	draw_wall(t_data *data, t_pos p)
 		{
 			imgputpixel(data->img, p.x + i, p.y + j, *(unsigned int *)(ce + (j
 						* data->tiles->bpp / 8) + (i * data->tiles->line_len)));
+			i++;
+		}
+		j++;
+	}
+}
+
+void	draw_layout(t_data *data)
+{
+	int	i;
+	int	j;
+
+	j = 0;
+//	while (data->map->map[0][j])
+//	{
+//		printf("%c\n", data->map->map[0][j]);
+//		j++;
+//	}
+	
+	while (j < data->map->map_y)
+	{
+		i = 0;
+		while (i < data->map->map_x)
+		{
+			if (data->map->map[j][i] == 1)
+				draw_wall(data, setpos(i * data->map->map_s, j *data->map->map_s));
 			i++;
 		}
 		j++;

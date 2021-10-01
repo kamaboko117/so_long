@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/30 15:37:25 by asaboure          #+#    #+#             */
-/*   Updated: 2021/10/01 17:52:13 by asaboure         ###   ########.fr       */
+/*   Updated: 2021/10/01 22:24:18 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,15 @@ void	so_long(char *ber_path, t_data *data)
 	game_loop(data);
 }
 
-int	checkargs(char *cub_path, t_data *data)
+int	checkargs(char *ber_path, t_data *data)
 {
 	char	**path;
 	int		path_len;
 
 	path_len = 0;
-	if (cub_path)
+	if (ber_path)
 	{
-		path = ft_split(cub_path, '.');
+		path = ft_split(ber_path, '.');
 		while (path[path_len])
 			path_len++;
 		if (ft_strncmp(path[path_len - 1], "ber", 4))

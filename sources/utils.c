@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/30 17:55:33 by asaboure          #+#    #+#             */
-/*   Updated: 2021/10/01 21:15:31 by asaboure         ###   ########.fr       */
+/*   Updated: 2021/10/01 21:47:12 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	isrow(char *row)
 	return (1);
 }
 
-void	set_position(t_player *player, int pos_x, int pos_y)
+void	set_player_position(t_player *player, int pos_x, int pos_y)
 {
 	player->x = pos_x;
 	player->y = pos_y;

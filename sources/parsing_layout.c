@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/01 03:59:31 by asaboure          #+#    #+#             */
-/*   Updated: 2021/10/01 04:35:38 by asaboure         ###   ########.fr       */
+/*   Updated: 2021/10/01 22:20:19 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	*get_row(char *line, t_data *data, int current_row)
 		{
 			if (isplayer(line[i]))
 			{
-				set_position(data->player, i, current_row);
+				set_player_position(data->player, i, current_row);
 				row[i] = 0;
 			}
 			else
@@ -57,6 +57,7 @@ void	get_layout(t_data *data)
 	int			i;
 
 	map = data->map;
+	printf("%s\n", map->tmpmap);
 	split_map = ft_split(map->tmpmap, '\n');
 	while (split_map[(int)map->map_y])
 	{

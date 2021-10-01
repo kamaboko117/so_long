@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/30 16:01:17 by asaboure          #+#    #+#             */
-/*   Updated: 2021/10/01 21:05:07 by asaboure         ###   ########.fr       */
+/*   Updated: 2021/10/01 22:31:56 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,11 +95,14 @@ void	clear_game(t_data *data);
 void	game_loop(t_data *data);
 void	check_ber_data(t_data *data);
 void	get_layout(t_data *data);
-void	set_position(t_player *player, int pos_x, int pos_y);
+void	set_player_position(t_player *player, int pos_x, int pos_y);
 void	free_split(char **str);
 void	check_layout(t_data *data, t_map *map, t_player *player);
 int		exit_so_long(t_data *data);
 void	imgdrawbg(t_imgdata *img, int xres, int yres);
 void	set_texture(t_data *data, t_imgdata *texture);
 void	draw_wall(t_data *data, t_pos p);
+t_pos	setpos(int x, int y);
+void	draw_layout(t_data *data);
+void	check_dimensions(t_data *data, int *width, int *height);
 #endif

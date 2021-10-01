@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/30 17:45:58 by asaboure          #+#    #+#             */
-/*   Updated: 2021/10/01 21:07:54 by asaboure         ###   ########.fr       */
+/*   Updated: 2021/10/01 22:15:00 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,7 @@ t_map	*mapstructinit(void)
 	map->tmpmap = NULL;
 	map->map_x = 0;
 	map->map_y = 0;
-	map->map_s = 16;
-	map->line_len = 0;
+	map->map_s = 35;
 	return (map);
 }
 
