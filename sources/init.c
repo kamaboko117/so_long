@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/30 17:45:58 by asaboure          #+#    #+#             */
-/*   Updated: 2021/10/01 22:15:00 by asaboure         ###   ########.fr       */
+/*   Updated: 2021/10/02 15:56:58 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ t_player	*playerstructinit(void)
 	p->x = 0;
 	p->y = 0;
 	p->count = 0;
+	p->frame = 0;
+	p->idle = 0;
 	return (p);
 }
 
@@ -90,6 +92,7 @@ t_data	*datainit(void)
 	if (!(data->sp_texture) || !(data->img)
 		|| !(data->player) || !(data->map) || !(data->tiles) || !(data->inputs))
 		return (NULL);
-	data->tiles->path = "textures/wall.xpm";
+	data->tiles->path = ft_strdup("textures/wall.xpm");
+	data->sp_texture->path = ft_strdup("textures/Cat-Sprite-Sheet.xpm");
 	return (data);
 }

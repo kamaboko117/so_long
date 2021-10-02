@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/30 16:01:17 by asaboure          #+#    #+#             */
-/*   Updated: 2021/10/01 22:31:56 by asaboure         ###   ########.fr       */
+/*   Updated: 2021/10/02 16:30:17 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ typedef struct s_player
 	int	x;
 	int	y;
 	int	count;
+	int	frame;
+	int	idle;
 }				t_player;
 
 typedef struct s_imgdata
@@ -105,4 +107,9 @@ void	draw_wall(t_data *data, t_pos p);
 t_pos	setpos(int x, int y);
 void	draw_layout(t_data *data);
 void	check_dimensions(t_data *data, int *width, int *height);
+void	draw_character(t_data *data);
+void	up(t_player *player, int velocity, t_data *data);
+void	left(t_player *player, int velocity, t_data *data);
+void	down(t_player *player, int velocity, t_data *data);
+void	right(t_player *player, int velocity, t_data *data);
 #endif

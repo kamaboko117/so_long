@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/01 02:53:07 by asaboure          #+#    #+#             */
-/*   Updated: 2021/10/01 21:45:43 by asaboure         ###   ########.fr       */
+/*   Updated: 2021/10/02 16:30:04 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ int	key_hook(int keycode, t_data *data)
 	if (keycode == 65307)
 		exit_so_long(data);
 	if (keycode == 119)
-		data->inputs->w = 1;
+		up(data->player, data->map->map_s, data);
 	if (keycode == 97)
-		data->inputs->a = 1;
+		left(data->player, data->map->map_s, data);
 	if (keycode == 115)
-		data->inputs->s = 1;
+		down(data->player, data->map->map_s, data);
 	if (keycode == 100)
-		data->inputs->d = 1;
+		right(data->player, data->map->map_s, data);
 	return (1);
 }
 
@@ -47,18 +47,19 @@ void	create_hooks(t_data *data)
 	mlx_hook(data->mlx_win, 33, 1L << 17, exit_so_long, data);
 }
 
-t_pos	setpos(int x, int y)
+//	mlx_clear_window(data->mlx_ptr, data->mlx_win);
+int	render_next_frame(t_data *data)
 {
-	t_pos	p;
-
-	p.x = x;
-	p.y = y;
-	return (p);
+	imgdrawbg(data->img, data->win_w, data->win_h);
+	draw_layout(data);
+	printf("player x: %d, player y: %d\n", data->player->x, data->player->y);
+	draw_character(data);
+	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->img->img, 0, 0);
+	return (1);
 }
 
 void	game_loop(t_data *data)
 {
-	set_texture(data, data->tiles);
 	data->mlx_win = mlx_new_window(data->mlx_ptr,
 			 data->win_w, data->win_h, "So_long");
 	if (data->mlx_win == NULL)
@@ -69,9 +70,17 @@ void	game_loop(t_data *data)
 			->img->line_len, &data->img->endian);
 	data->img->height = data->win_h;
 	data->img->width = data->win_w;
+	set_texture(data, data->tiles);
+	data->map->map_s = data->tiles->width;
+	set_texture(data, data->sp_texture);
 	imgdrawbg(data->img, data->win_w, data->win_h);
-	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->img->img, 0, 0);
 	draw_layout(data);
-	//mlx_loop_hook(data->mlx_ptr, render_next_frame, data);
+	data->player->x = data->player->x * data->map->map_s;
+	data->player->y = data->player->y * data->map->map_s;
+	printf("player x: %d, player y: %d map_s: %d\n", data->player->x, data
+		->player->y, data->map->map_s);
+	draw_character(data);
+	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->img->img, 0, 0);
+	mlx_loop_hook(data->mlx_ptr, render_next_frame, data);
 	mlx_loop(data->mlx_ptr);
 }

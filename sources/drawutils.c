@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/01 04:56:24 by asaboure          #+#    #+#             */
-/*   Updated: 2021/10/01 22:20:29 by asaboure         ###   ########.fr       */
+/*   Updated: 2021/10/02 16:22:31 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,21 +65,45 @@ void	draw_layout(t_data *data)
 	int	j;
 
 	j = 0;
-//	while (data->map->map[0][j])
-//	{
-//		printf("%c\n", data->map->map[0][j]);
-//		j++;
-//	}
-	
 	while (j < data->map->map_y)
 	{
 		i = 0;
 		while (i < data->map->map_x)
 		{
 			if (data->map->map[j][i] == 1)
-				draw_wall(data, setpos(i * data->map->map_s, j *data->map->map_s));
+				draw_wall(data, setpos(i * data->map->map_s, j
+						* data->map->map_s));
 			i++;
 		}
 		j++;
+	}
+}
+
+void	draw_character(t_data *data)
+{
+	int				i;
+	int				j;
+	char			*ch;
+	unsigned int	color;
+
+	if (data->player->frame > 5)
+		data->player->frame = 0;
+	if (data->player->frame != 0)
+		data->player->idle = 4;
+	ch = data->sp_texture->addr;
+	j = -1;
+	while (j++ < 32)
+	{
+		i = 0;
+		while (i < 32)
+		{
+			color = *(unsigned int *)(ch + ((i + data->player->frame * 32)
+						* data->sp_texture->bpp / 8) + ((j + 32 * data->player
+							->idle) * data->sp_texture->line_len));
+			if (color != 0xFF000000)
+				imgputpixel(data->img, data->player->x + i, data->player->y + j,
+					color);
+			i++;
+		}
 	}
 }
