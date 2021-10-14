@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/01 04:56:24 by asaboure          #+#    #+#             */
-/*   Updated: 2021/10/02 16:22:31 by asaboure         ###   ########.fr       */
+/*   Updated: 2021/10/05 14:38:25 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,30 @@ void	draw_wall(t_data *data, t_pos p)
 	}
 }
 
+void	draw_exit(t_data *data, t_pos p)
+{
+	int				i;
+	int				j;
+	char			*ex;
+	unsigned int	color;
+
+	ex = data->exit->addr;
+	j = 0;
+	while (j < 32)
+	{
+		i = 0;
+		while (i < 32)
+		{
+			color = *(unsigned int *)(ex + (i * data->exit->bpp / 8) + (j
+						* data->exit->line_len));
+			if (color != 0xFF000000)
+				imgputpixel(data->img, p.x + i, p.y + j, color);
+			i++;
+		}
+		j++;
+	}
+}
+
 void	draw_layout(t_data *data)
 {
 	int	i;
@@ -73,37 +97,14 @@ void	draw_layout(t_data *data)
 			if (data->map->map[j][i] == 1)
 				draw_wall(data, setpos(i * data->map->map_s, j
 						* data->map->map_s));
+			if (data->map->map[j][i] == 2)
+				draw_collectible(data, setpos(i * data->map->map_s, j
+						* data->map->map_s));
+			if (data->map->map[j][i] == 3)
+				draw_exit(data, setpos(i * data->map->map_s, j
+						* data->map->map_s));
 			i++;
 		}
 		j++;
-	}
-}
-
-void	draw_character(t_data *data)
-{
-	int				i;
-	int				j;
-	char			*ch;
-	unsigned int	color;
-
-	if (data->player->frame > 5)
-		data->player->frame = 0;
-	if (data->player->frame != 0)
-		data->player->idle = 4;
-	ch = data->sp_texture->addr;
-	j = -1;
-	while (j++ < 32)
-	{
-		i = 0;
-		while (i < 32)
-		{
-			color = *(unsigned int *)(ch + ((i + data->player->frame * 32)
-						* data->sp_texture->bpp / 8) + ((j + 32 * data->player
-							->idle) * data->sp_texture->line_len));
-			if (color != 0xFF000000)
-				imgputpixel(data->img, data->player->x + i, data->player->y + j,
-					color);
-			i++;
-		}
 	}
 }

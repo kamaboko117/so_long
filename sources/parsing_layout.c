@@ -6,19 +6,23 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/01 03:59:31 by asaboure          #+#    #+#             */
-/*   Updated: 2021/10/01 22:20:19 by asaboure         ###   ########.fr       */
+/*   Updated: 2021/10/05 14:25:31 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-int	row_ternary(char c)
+int	tile_type(char c)
 {
 	int	i;
 
 	i = 0;
-	if (ft_isdigit(c))
-		i = c - '0';
+	if (c == '1')
+		return (1);
+	if (c == 'C')
+		return (2);
+	if (c == 'E')
+		return (3);
 	return (i);
 }
 
@@ -41,7 +45,7 @@ int	*get_row(char *line, t_data *data, int current_row)
 				row[i] = 0;
 			}
 			else
-				row[i] = row_ternary(line[i]);
+				row[i] = tile_type(line[i]);
 			i++;
 		}
 		while (i < data->map->map_x)
@@ -57,12 +61,12 @@ void	get_layout(t_data *data)
 	int			i;
 
 	map = data->map;
-	printf("%s\n", map->tmpmap);
 	split_map = ft_split(map->tmpmap, '\n');
+	map->map_x = ft_strlen(split_map[map->map_y]);
 	while (split_map[(int)map->map_y])
 	{
-		if (map->map_x < (int)ft_strlen(split_map[map->map_y]))
-			map->map_x = (int)ft_strlen(split_map[map->map_y]);
+		if (map->map_x != (int)ft_strlen(split_map[map->map_y]))
+			exit_failure("map is not rectangular\n", data);
 		map->map_y++;
 	}
 	map->map = (int **)malloc(map->map_y * sizeof(int *));

@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/01 02:53:07 by asaboure          #+#    #+#             */
-/*   Updated: 2021/10/02 16:30:04 by asaboure         ###   ########.fr       */
+/*   Updated: 2021/10/14 13:31:11 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ int	render_next_frame(t_data *data)
 {
 	imgdrawbg(data->img, data->win_w, data->win_h);
 	draw_layout(data);
-	printf("player x: %d, player y: %d\n", data->player->x, data->player->y);
 	draw_character(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->img->img, 0, 0);
 	return (1);
@@ -73,12 +72,13 @@ void	game_loop(t_data *data)
 	set_texture(data, data->tiles);
 	data->map->map_s = data->tiles->width;
 	set_texture(data, data->sp_texture);
+	set_texture(data, data->c_texture);
+	set_texture(data, data->exit);
+	set_texture(data, data->gameover->img);
 	imgdrawbg(data->img, data->win_w, data->win_h);
 	draw_layout(data);
 	data->player->x = data->player->x * data->map->map_s;
 	data->player->y = data->player->y * data->map->map_s;
-	printf("player x: %d, player y: %d map_s: %d\n", data->player->x, data
-		->player->y, data->map->map_s);
 	draw_character(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->img->img, 0, 0);
 	mlx_loop_hook(data->mlx_ptr, render_next_frame, data);

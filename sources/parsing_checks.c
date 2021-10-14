@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/01 03:11:54 by asaboure          #+#    #+#             */
-/*   Updated: 2021/10/01 22:33:16 by asaboure         ###   ########.fr       */
+/*   Updated: 2021/10/05 14:44:01 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,23 +21,40 @@ static int	ft_ismap_char(char c)
 	return (0);
 }
 
+void	check_map_requirements(t_data *data, int collectibles, int exits)
+{
+	if (data->player->count == 0)
+		exit_failure("No player in map\n", data);
+	if (!collectibles)
+		exit_failure("map has no collectibles\n", data);
+	if (!exits)
+		exit_failure("map has no exits\n", data);
+}
+
 static void	check_map(t_data *data)
 {
 	int	i;
+	int	exits;
+	int	collectibles;
 
 	if (!data->map)
 		exit_failure("Missing map layout\n", data);
 	else
 	{
 		i = 0;
+		exits = 0;
+		collectibles = 0;
 		while (data->map->tmpmap[i])
 		{
 			if (!ft_ismap_char(data->map->tmpmap[i]))
 				exit_failure("Wrong characters in the map layout\n", data);
+			if (data->map->tmpmap[i] == 'E')
+				exits++;
+			if (data->map->tmpmap[i] == 'C')
+				collectibles++;
 			i++;
 		}
-		if (data->player->count == 0)
-			exit_failure("No player in map\n", data);
+		check_map_requirements(data, collectibles, exits);
 	}
 }
 

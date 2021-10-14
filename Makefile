@@ -6,7 +6,7 @@
 #    By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/21 14:20:20 by asaboure          #+#    #+#              #
-#    Updated: 2021/10/02 16:25:59 by asaboure         ###   ########.fr        #
+#    Updated: 2021/10/14 13:33:15 by asaboure         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,10 @@ SRCS	=	so_long.c															\
 			sources/drawutils.c													\
 			sources/texture.c													\
 			sources/utils2.c													\
-			sources/movement.c
+			sources/movement.c													\
+			sources/drawutils2.c												\
+			sources/gameover.c													\
+			sources/init2.c
 			
 LIBFTSRCS = ft_memccpy.c														\
 			ft_memchr.c															\

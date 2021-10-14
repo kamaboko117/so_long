@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/30 17:45:58 by asaboure          #+#    #+#             */
-/*   Updated: 2021/10/02 15:56:58 by asaboure         ###   ########.fr       */
+/*   Updated: 2021/10/14 13:32:56 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ t_player	*playerstructinit(void)
 	p->count = 0;
 	p->frame = 0;
 	p->idle = 0;
+	p->orientation = 0;
 	return (p);
 }
 
@@ -83,16 +84,20 @@ t_data	*datainit(void)
 		return (NULL);
 	data->map_started = 0;
 	data->map_stopped = 0;
+	data->moves = 0;
 	data->sp_texture = imgstructinit(data);
 	data->tiles = imgstructinit(data);
+	data->c_texture = imgstructinit(data);
+	data->exit = imgstructinit(data);
+	data->gameover = sprite_struct_init(data);
 	data->img = imgstructinit(data);
 	data->player = playerstructinit();
 	data->map = mapstructinit();
 	data->inputs = inputstructinit();
-	if (!(data->sp_texture) || !(data->img)
-		|| !(data->player) || !(data->map) || !(data->tiles) || !(data->inputs))
+	if (!(data->sp_texture) || !(data->img) || !(data->c_texture) || !(data
+			->gameover) || !(data->exit) || !(data->player) || !(data->map)
+		|| !(data->tiles) || !(data->inputs))
 		return (NULL);
-	data->tiles->path = ft_strdup("textures/wall.xpm");
-	data->sp_texture->path = ft_strdup("textures/Cat-Sprite-Sheet.xpm");
+	set_data_paths(data);
 	return (data);
 }
