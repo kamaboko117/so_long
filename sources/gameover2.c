@@ -1,35 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   gameover2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/08 14:45:09 by asaboure          #+#    #+#             */
-/*   Updated: 2021/10/14 16:13:29 by asaboure         ###   ########.fr       */
+/*   Created: 2021/10/14 17:40:04 by asaboure          #+#    #+#             */
+/*   Updated: 2021/10/14 17:41:57 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <stdlib.h>
+#include "../so_long.h"
 
-char	*ft_strdup(const char *s1)
+int	gameover_key_hook(int keycode, t_data *data)
 {
-	char	*ret;
-	size_t	i;
-
-	i = 0;
-	while (s1[i])
-		i++;
-	ret = (char *)malloc(sizeof(char) * i + 1);
-	if (!ret)
-		return (NULL);
-	i = 0;
-	while (s1[i])
-	{
-		ret[i] = s1[i];
-		i++;
-	}
-	ret[i] = '\0';
-	return (ret);
+	if (keycode == 65307)
+		exit_so_long(data);
+	return (1);
 }

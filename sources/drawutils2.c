@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/02 17:31:09 by asaboure          #+#    #+#             */
-/*   Updated: 2021/10/05 14:40:15 by asaboure         ###   ########.fr       */
+/*   Updated: 2021/10/14 18:59:42 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,15 @@ void	draw_collectible(t_data *data, t_pos p)
 	char			*co;
 	unsigned int	color;
 
-	co = data->c_texture->addr;
+	co = data->sushi.img->addr;
 	j = 0;
 	while (j < 32)
 	{
 		i = 0;
 		while (i < 32)
 		{
-			color = *(unsigned int *)(co + (i * data->c_texture->bpp / 8)
-					+ (j * data->c_texture->line_len));
+			color = *(unsigned int *)(co + (i * data->sushi.img->bpp / 8)
+					+ (j * data->sushi.img->line_len));
 			if (color != 0xFF000000)
 				imgputpixel(data->img, p.x + i, p.y + j, color);
 			i++;

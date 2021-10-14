@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 16:26:02 by asaboure          #+#    #+#             */
-/*   Updated: 2021/07/23 19:50:53 by asaboure         ###   ########.fr       */
+/*   Updated: 2021/10/14 16:39:28 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,13 @@ char	*ft_next(char *result)
 	while (result[i] && result[i] != '\n')
 		i++;
 	tmp = ft_strdup(result + i + 1);
+	free(result);
 	if (!tmp)
 		return (NULL);
-	free(result);
 	result = ft_strdup(tmp);
+	free(tmp);
 	if (!result)
 		return (NULL);
-	free(tmp);
 	return (result);
 }
 

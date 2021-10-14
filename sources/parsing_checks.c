@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/01 03:11:54 by asaboure          #+#    #+#             */
-/*   Updated: 2021/10/05 14:44:01 by asaboure         ###   ########.fr       */
+/*   Updated: 2021/10/14 19:03:12 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void	check_map_requirements(t_data *data, int collectibles, int exits)
 {
 	if (data->player->count == 0)
 		exit_failure("No player in map\n", data);
+	if (data->player->count > 1)
+		exit_failure("Maps has more than one player\n", data);
 	if (!collectibles)
 		exit_failure("map has no collectibles\n", data);
 	if (!exits)
@@ -35,7 +37,6 @@ static void	check_map(t_data *data)
 {
 	int	i;
 	int	exits;
-	int	collectibles;
 
 	if (!data->map)
 		exit_failure("Missing map layout\n", data);
@@ -43,7 +44,6 @@ static void	check_map(t_data *data)
 	{
 		i = 0;
 		exits = 0;
-		collectibles = 0;
 		while (data->map->tmpmap[i])
 		{
 			if (!ft_ismap_char(data->map->tmpmap[i]))
@@ -51,10 +51,10 @@ static void	check_map(t_data *data)
 			if (data->map->tmpmap[i] == 'E')
 				exits++;
 			if (data->map->tmpmap[i] == 'C')
-				collectibles++;
+				data->sushi.max++;
 			i++;
 		}
-		check_map_requirements(data, collectibles, exits);
+		check_map_requirements(data, data->sushi.max, exits);
 	}
 }
 
@@ -69,6 +69,7 @@ void	check_dimensions(t_data *data, int *width, int *height)
 	if (data->mlx_ptr == NULL)
 		exit_failure("failed to initiate mlx instance\n", data);
 	mlx_get_screen_size(data->mlx_ptr, &max_x, &max_y);
+	max_y -= 100;
 	if (*width < 100)
 		*width = 100;
 	if (*height < 100)
@@ -82,5 +83,7 @@ void	check_dimensions(t_data *data, int *width, int *height)
 //check_texture
 void	check_ber_data(t_data *data)
 {
+	if (data->error != NULL)
+		exit_failure(data->error, data);
 	check_map(data);
 }

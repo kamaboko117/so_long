@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/30 16:01:17 by asaboure          #+#    #+#             */
-/*   Updated: 2021/10/14 13:36:07 by asaboure         ###   ########.fr       */
+/*   Updated: 2021/10/14 19:08:21 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,57 +88,68 @@ typedef struct s_sprite
 	double				tx;
 }				t_sprite;
 
+typedef struct s_collectibles
+{
+	t_imgdata	*img;
+	int			max;
+	int			current;
+}				t_collectibles;
+
 typedef struct s_data
 {
-	int			win_h;
-	int			win_w;
-	void		*mlx_ptr;
-	void		*mlx_win;
-	int			map_started;
-	int			map_stopped;
-	int			moves;
-	t_inputs	*inputs;
-	t_player	*player;
-	t_imgdata	*img;
-	t_imgdata	*sp_texture;
-	t_imgdata	*tiles;
-	t_imgdata	*c_texture;
-	t_imgdata	*exit;
-	t_sprite	*gameover;
-	t_map		*map;
+	int				win_h;
+	int				win_w;
+	void			*mlx_ptr;
+	void			*mlx_win;
+	int				map_started;
+	int				map_stopped;
+	int				moves;
+	char			*error;
+	t_inputs		*inputs;
+	t_player		*player;
+	t_imgdata		*img;
+	t_imgdata		*sp_texture;
+	t_imgdata		*tiles;
+	t_collectibles	sushi;
+	t_imgdata		*exit;
+	t_sprite		*gameover;
+	t_map			*map;
 }				t_data;
 
-t_map		*mapstructinit(void);
-void		exit_failure(char *error, t_data *data);
-void		puterror(char *str);
-t_data		*datainit(void);
-void		read_ber(char *ber_path, t_data *data);
-int			isempty(char *line);
-int			isplayer(char c);
-int			isrow(char *row);
-void		clear_game(t_data *data);
-void		game_loop(t_data *data);
-void		check_ber_data(t_data *data);
-void		get_layout(t_data *data);
-void		set_player_position(t_player *player, int pos_x, int pos_y);
-void		free_split(char **str);
-void		check_layout(t_data *data, t_map *map, t_player *player);
-int			exit_so_long(t_data *data);
-void		imgdrawbg(t_imgdata *img, int xres, int yres);
-void		set_texture(t_data *data, t_imgdata *texture);
-void		draw_wall(t_data *data, t_pos p);
-t_pos		setpos(int x, int y);
-void		draw_layout(t_data *data);
-void		check_dimensions(t_data *data, int *width, int *height);
-void		draw_character(t_data *data);
-void		up(t_player *player, int velocity, t_data *data);
-void		left(t_player *player, int velocity, t_data *data);
-void		down(t_player *player, int velocity, t_data *data);
-void		right(t_player *player, int velocity, t_data *data);
-void		draw_collectible(t_data *data, t_pos p);
-void		imgputpixel(t_imgdata *img, int x, int y, int color);
-void		set_data_paths(t_data *data);
-int			game_over(t_data *data);
-t_sprite	*sprite_struct_init(t_data *data);
-t_imgdata	*imgstructinit(t_data *data);
+t_map			*mapstructinit(void);
+void			exit_failure(char *error, t_data *data);
+void			puterror(char *str);
+t_data			*datainit(void);
+void			read_ber(char *ber_path, t_data *data);
+int				isempty(char *line);
+int				isplayer(char c);
+int				isrow(char *row);
+void			clear_game(t_data *data);
+void			game_loop(t_data *data);
+void			check_ber_data(t_data *data);
+void			get_layout(t_data *data);
+void			set_player_position(t_player *player, int pos_x, int pos_y);
+void			free_split(char **str);
+void			check_layout(t_data *data, t_map *map, t_player *player);
+int				exit_so_long(t_data *data);
+void			imgdrawbg(t_imgdata *img, int xres, int yres);
+void			set_texture(t_data *data, t_imgdata *texture);
+void			draw_wall(t_data *data, t_pos p);
+t_pos			setpos(int x, int y);
+void			draw_layout(t_data *data);
+void			check_dimensions(t_data *data, int *width, int *height);
+void			draw_character(t_data *data);
+void			up(t_player *player, int velocity, t_data *data);
+void			left(t_player *player, int velocity, t_data *data);
+void			down(t_player *player, int velocity, t_data *data);
+void			right(t_player *player, int velocity, t_data *data);
+void			draw_collectible(t_data *data, t_pos p);
+void			imgputpixel(t_imgdata *img, int x, int y, int color);
+void			set_data_paths(t_data *data);
+int				game_over(t_data *data);
+t_sprite		*sprite_struct_init(t_data *data);
+t_imgdata		*imgstructinit(t_data *data);
+int				gameover_key_hook(int keycode, t_data *data);
+void			set_mlx(t_data *data);
+t_collectibles	collectiblestructinit(t_data *data);
 #endif

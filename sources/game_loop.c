@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/01 02:53:07 by asaboure          #+#    #+#             */
-/*   Updated: 2021/10/14 13:31:11 by asaboure         ###   ########.fr       */
+/*   Updated: 2021/10/14 18:58:16 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	game_loop(t_data *data)
 	set_texture(data, data->tiles);
 	data->map->map_s = data->tiles->width;
 	set_texture(data, data->sp_texture);
-	set_texture(data, data->c_texture);
+	set_texture(data, data->sushi.img);
 	set_texture(data, data->exit);
 	set_texture(data, data->gameover->img);
 	imgdrawbg(data->img, data->win_w, data->win_h);

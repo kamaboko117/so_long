@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/02 16:24:28 by asaboure          #+#    #+#             */
-/*   Updated: 2021/10/14 13:17:24 by asaboure         ###   ########.fr       */
+/*   Updated: 2021/10/14 19:04:06 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@ int	checkcollision(double x, double y, t_data *data)
 	if (data->map->map[(int)y][(int)x] == 1)
 		return (1);
 	if (data->map->map[(int)y][(int)x] == 2)
+	{
 		data->map->map[(int)y][(int)x] = 0;
+		data->sushi.current++;
+	}
 	if (data->map->map[(int)y][(int)x] == 3)
 		return (2);
 	return (0);

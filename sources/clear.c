@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/01 02:44:09 by asaboure          #+#    #+#             */
-/*   Updated: 2021/10/02 12:56:55 by asaboure         ###   ########.fr       */
+/*   Updated: 2021/10/14 18:57:51 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	clear_image(t_imgdata *img, void *mlx)
 
 void	clear_window(t_data *data)
 {
-	if (data->mlx_win)
+	if (data->mlx_ptr && data->mlx_win)
 		mlx_destroy_window(data->mlx_ptr, data->mlx_win);
 }
 
@@ -49,8 +49,13 @@ void	clear_game(t_data *data)
 	free(data->inputs);
 	clear_map(data);
 	clear_image(data->sp_texture, data->mlx_ptr);
+	clear_image(data->tiles, data->mlx_ptr);
+	clear_image(data->sushi.img, data->mlx_ptr);
+	clear_image(data->exit, data->mlx_ptr);
 	clear_image(data->img, data->mlx_ptr);
 	clear_window(data);
+	clear_image(data->gameover->img, data->mlx_ptr);
+	free(data->gameover);
 	if (data->mlx_ptr)
 		mlx_destroy_display(data->mlx_ptr);
 	free(data->mlx_ptr);

@@ -6,11 +6,17 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/30 17:51:30 by asaboure          #+#    #+#             */
-/*   Updated: 2021/10/05 14:25:41 by asaboure         ###   ########.fr       */
+/*   Updated: 2021/10/14 17:36:39 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
+
+void	parsing_exit_failure(char *error, char *line, t_data *data)
+{
+	free(line);
+	exit_failure(error, data);
+}
 
 static void	get_map(char *line, t_data *data)
 {
@@ -23,10 +29,7 @@ static void	get_map(char *line, t_data *data)
 	{
 		if (isplayer(line[i]))
 		{
-			if (data->player->count < 1)
-				data->player->count++;
-			else
-				exit_failure("Map has more than one player\n", data);
+			data->player->count++;
 		}
 	}
 }
@@ -36,13 +39,13 @@ void	get_ber_data(char *line, t_data *data)
 	if (data->map_started == 1)
 	{
 		if (data->map_stopped == 1 && !isempty(line))
-			exit_failure("Map has a format error (1)\n", data);
+			data->error = "Map has a format error (1)\n";
 		if (isempty(line))
 			data->map_stopped = 1;
 		else if (isrow(line))
 			get_map(line, data);
 		else
-			exit_failure("Map has a format error (2)\n", data);
+			data->error = "Map has a format error (2)\n";
 	}
 	else
 	{
@@ -52,7 +55,7 @@ void	get_ber_data(char *line, t_data *data)
 			get_map(line, data);
 		}
 		else
-			exit_failure("Map has a format error (3)\n", data);
+			data->error = "Map has a format error (3)\n";
 	}
 }
 

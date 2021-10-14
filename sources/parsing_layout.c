@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/01 03:59:31 by asaboure          #+#    #+#             */
-/*   Updated: 2021/10/05 14:25:31 by asaboure         ###   ########.fr       */
+/*   Updated: 2021/10/14 17:30:50 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,12 @@ int	*get_row(char *line, t_data *data, int current_row)
 	return (row);
 }
 
+void	getlayout_exit_failure(char *error, char **split_map, t_data *data)
+{
+	free_split(split_map);
+	exit_failure(error, data);
+}
+
 void	get_layout(t_data *data)
 {
 	char		**split_map;
@@ -66,7 +72,7 @@ void	get_layout(t_data *data)
 	while (split_map[(int)map->map_y])
 	{
 		if (map->map_x != (int)ft_strlen(split_map[map->map_y]))
-			exit_failure("map is not rectangular\n", data);
+			getlayout_exit_failure("map is not rectangular\n", split_map, data);
 		map->map_y++;
 	}
 	map->map = (int **)malloc(map->map_y * sizeof(int *));

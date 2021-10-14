@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/30 17:45:58 by asaboure          #+#    #+#             */
-/*   Updated: 2021/10/14 13:32:56 by asaboure         ###   ########.fr       */
+/*   Updated: 2021/10/14 19:07:36 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,19 +82,21 @@ t_data	*datainit(void)
 	data = (t_data *)malloc(sizeof(t_data));
 	if (data == NULL)
 		return (NULL);
+	set_mlx(data);
+	data->error = NULL;
 	data->map_started = 0;
 	data->map_stopped = 0;
 	data->moves = 0;
 	data->sp_texture = imgstructinit(data);
 	data->tiles = imgstructinit(data);
-	data->c_texture = imgstructinit(data);
+	data->sushi = collectiblestructinit(data);
 	data->exit = imgstructinit(data);
 	data->gameover = sprite_struct_init(data);
 	data->img = imgstructinit(data);
 	data->player = playerstructinit();
 	data->map = mapstructinit();
 	data->inputs = inputstructinit();
-	if (!(data->sp_texture) || !(data->img) || !(data->c_texture) || !(data
+	if (!(data->sp_texture) || !(data->img) || !(data->sushi.img) || !(data
 			->gameover) || !(data->exit) || !(data->player) || !(data->map)
 		|| !(data->tiles) || !(data->inputs))
 		return (NULL);

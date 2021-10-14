@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/01 04:56:24 by asaboure          #+#    #+#             */
-/*   Updated: 2021/10/05 14:38:25 by asaboure         ###   ########.fr       */
+/*   Updated: 2021/10/14 19:02:09 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ void	draw_exit(t_data *data, t_pos p)
 	char			*ex;
 	unsigned int	color;
 
+	if (data->sushi.current != data->sushi.max)
+		return ;
 	ex = data->exit->addr;
 	j = 0;
 	while (j < 32)
