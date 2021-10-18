@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/01 02:53:07 by asaboure          #+#    #+#             */
-/*   Updated: 2021/10/14 18:58:16 by asaboure         ###   ########.fr       */
+/*   Updated: 2021/10/18 16:08:40 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	render_next_frame(t_data *data)
 void	game_loop(t_data *data)
 {
 	data->mlx_win = mlx_new_window(data->mlx_ptr,
-			 data->win_w, data->win_h, "So_long");
+			data->win_w, data->win_h, "So_long");
 	if (data->mlx_win == NULL)
 		exit_failure("failed to create mlx window\n", data);
 	create_hooks(data);

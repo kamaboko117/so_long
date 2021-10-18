@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/02 17:31:09 by asaboure          #+#    #+#             */
-/*   Updated: 2021/10/14 18:59:42 by asaboure         ###   ########.fr       */
+/*   Updated: 2021/10/18 16:08:22 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static void	mirrordraw(t_data *data, char *ch)
 							->idle) * data->sp_texture->line_len));
 			if (color != 0xFF000000)
 				imgputpixel(data->img, data->player->x - i + 32, data->player->y
-					 + j, color);
+					+ j, color);
 			i++;
 		}
 	}
