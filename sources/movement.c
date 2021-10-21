@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/02 16:24:28 by asaboure          #+#    #+#             */
-/*   Updated: 2021/10/14 19:04:06 by asaboure         ###   ########.fr       */
+/*   Updated: 2021/10/21 19:21:59 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ void	up(t_player *player, int velocity, t_data *data)
 		player->y -= velocity;
 	player->frame++;
 	printf("moves: %d\n", ++data->moves);
-	if (checkcollision(player->x, player->y, data) == 2)
+	if (checkcollision(player->x, player->y, data) == 2 && data->sushi.current
+		== data->sushi.max)
 	{
 		imgdrawbg(data->img, data->win_w, data->win_h);
 		draw_layout(data);
@@ -50,7 +51,8 @@ void	left(t_player *player, int velocity, t_data *data)
 	player->frame++;
 	player->orientation = 1;
 	printf("moves: %d\n", ++data->moves);
-	if (checkcollision(player->x, player->y, data) == 2)
+	if (checkcollision(player->x, player->y, data) == 2 && data->sushi.current
+		== data->sushi.max)
 	{
 		imgdrawbg(data->img, data->win_w, data->win_h);
 		draw_layout(data);
@@ -65,7 +67,8 @@ void	down(t_player *player, int velocity, t_data *data)
 		player->y += velocity;
 	player->frame++;
 	printf("moves: %d\n", ++data->moves);
-	if (checkcollision(player->x, player->y, data) == 2)
+	if (checkcollision(player->x, player->y, data) == 2 && data->sushi.current
+		== data->sushi.max)
 	{
 		imgdrawbg(data->img, data->win_w, data->win_h);
 		draw_layout(data);
@@ -81,7 +84,8 @@ void	right(t_player *player, int velocity, t_data *data)
 	player->frame++;
 	player->orientation = 0;
 	printf("moves: %d\n", ++data->moves);
-	if (checkcollision(player->x, player->y, data) == 2)
+	if (checkcollision(player->x, player->y, data) == 2 && data->sushi.current
+		== data->sushi.max)
 	{
 		imgdrawbg(data->img, data->win_w, data->win_h);
 		draw_layout(data);
